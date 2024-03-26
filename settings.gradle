@@ -1,4 +1,3 @@
 rootProject.name = 'delivery-service'
-include 'api'
-include 'db'
-
+include ':api'
+include ':db'
