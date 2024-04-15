@@ -1,6 +1,8 @@
 package com.laze.delivery.account;
 
 import com.laze.delivery.account.model.AccountMeResponse;
+import com.laze.delivery.common.api.Api;
+import com.laze.delivery.common.error.UserErrorCode;
 import com.laze.delivery.db.account.AccountEntity;
 import com.laze.delivery.db.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +20,16 @@ public class AccountApiController {
     private  final AccountRepository accountRepository;
 
     @GetMapping("/me")
-    public AccountMeResponse me(){
+    public Api<Object> me(){
 
-        return AccountMeResponse.builder()
+        var response = AccountMeResponse.builder()
                 .name("laze")
                 .email("yysi8771@gmail.com")
                 .registeredAt(LocalDateTime.now())
                 .build();
+
+
+
+        return Api.Error(UserErrorCode.USER_NOT_FOUND, "사용자 없음");
     }
 }
