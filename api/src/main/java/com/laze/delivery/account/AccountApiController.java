@@ -2,7 +2,9 @@ package com.laze.delivery.account;
 
 import com.laze.delivery.account.model.AccountMeResponse;
 import com.laze.delivery.common.api.Api;
+import com.laze.delivery.common.error.ErrorCode;
 import com.laze.delivery.common.error.UserErrorCode;
+import com.laze.delivery.common.exception.ApiException;
 import com.laze.delivery.db.account.AccountEntity;
 import com.laze.delivery.db.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ public class AccountApiController {
     private  final AccountRepository accountRepository;
 
     @GetMapping("/me")
-    public Api<Object> me(){
+    public Api<AccountMeResponse> me(){
 
         var response = AccountMeResponse.builder()
                 .name("laze")
@@ -28,8 +30,14 @@ public class AccountApiController {
                 .registeredAt(LocalDateTime.now())
                 .build();
 
+        var str = "helloworld";
+        try{
+            var age = Integer.parseInt(str);
+        }catch (Exception e){
+            throw new ApiException(ErrorCode.SERVER_ERROR, e, "사용자 Me 호출시 에러 발생");
+        }
 
 
-        return Api.Error(UserErrorCode.USER_NOT_FOUND, "사용자 없음");
+        return Api.OK(response);
     }
 }
