@@ -21,7 +21,7 @@ public class LoggerFilter implements Filter {
         var res = new ContentCachingResponseWrapper((HttpServletResponse) servletResponse);
 
         filterChain.doFilter(req, res);
-
+        log.info("Request URI : {} ",req.getRequestURI());
         // request 정보
         var headerNames = req.getHeaderNames();
         var headerValues = new StringBuilder();
