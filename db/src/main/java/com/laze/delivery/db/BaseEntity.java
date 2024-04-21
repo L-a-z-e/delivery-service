@@ -14,6 +14,8 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @SuperBuilder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
 
     @Id
