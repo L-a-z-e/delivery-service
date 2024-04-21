@@ -2,6 +2,7 @@ package com.laze.delivery.domain.user.controller;
 
 import com.laze.delivery.common.api.Api;
 import com.laze.delivery.domain.user.business.UserBusiness;
+import com.laze.delivery.domain.user.controller.model.UserLoginRequest;
 import com.laze.delivery.domain.user.controller.model.UserRegisterRequest;
 import com.laze.delivery.domain.user.controller.model.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,13 @@ public class UserOpenApiController {
     public Api<UserResponse> register(@Valid @RequestBody Api<UserRegisterRequest> request) {
 
         var response = userBusiness.register(request.getBody());
+        return Api.OK(response);
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public Api<UserResponse> login(@Valid @RequestBody Api<UserLoginRequest> request) {
+        var response = userBusiness.login(request.getBody());
         return Api.OK(response);
     }
 }
